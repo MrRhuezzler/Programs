@@ -1,3 +1,7 @@
+// Author        : Rhubanraj P (anonymouspyro369@gmail.com)
+// Date created  : 18-Sep-20 (DD-MM-YY) 
+// Language Used : C
+
 #include <stdio.h>
 #include <math.h>
 
