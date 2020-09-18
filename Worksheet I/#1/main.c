@@ -35,7 +35,7 @@ int main(){
 		}else if(opt == 3){
 			printf("%s\n", "Thank you!");
 		}else{
-			printf("%s\n", "Invalid choice !");
+			printf("%s\n", "Invalid choice!");
 		}
 
 	}while(opt != 3);
