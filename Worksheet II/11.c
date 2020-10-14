@@ -4,20 +4,24 @@
 
 #include <stdio.h>
 
-
 int main(){
 
-    char x[8];
+    int x;
     printf("Enter a number...\n");
-    scanf("%s", &x);
+    scanf("%d", &x);
 
-    int integer = 0;
-
-    for(int i = 0; i < 7; i++){
-        
+    int bin[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    for(int i = 15; x != 0; i--){
+        bin[i] = x % 2;
+        x /=2;
     }
 
+    printf("Binary Equivalent: ");
 
-
+    for(int i = 0; i < 16; i++){
+        if(i != 0 && i % 4 == 0) printf(" ");
+        printf("%d", bin[i]);
+    }
+    printf("\n");
     return 0;
 }
