@@ -12,7 +12,7 @@ void main(){
     scanf("%lf %lf", &hourlyPay, &workedHours);
 
     double extras = (workedHours - timeAndHalfCutoff);
-    double payment = workedHours * hourlyPay + extras * hourlyPay * 0.5 * (int)(extras > 0);
+    double payment = workedHours * hourlyPay + extras * hourlyPay * 0.5 * (extras > 0);
 
     printf("Your payment: %.2lf\n", payment);
 
