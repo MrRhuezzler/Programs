@@ -7,41 +7,42 @@
 
 int main(){
 
-	int opt;
-	
-	float p, r, n, t, ci, si, mv;
-	
+	int option;
+		
 	do{
 
 		printf("1 => SI\n2 => CI\n3 => Quit\nYour choice: ");
-		scanf("%d", &opt);
+		scanf("%d", &option);
 
-		if(opt == 1){
+		if(option == 1){
 
-			printf("Enter Principal Amount, Interest rate (%%), Period...\n");
-			scanf("%f %f %f", &p, &r, &t);
-			r /= 100;
-			si = p * r * t;
-			mv = p * ( 1 + (r * t) );
-
-			printf("Simple Interest: %f\nMaturity Value: %f\n", si, mv);
-
-		}else if(opt == 2){
-
+			float interestRate, amount, timePeriod, simpleInterest, maturityValue;
 
 			printf("Enter Principal Amount, Interest rate (%%), Period...\n");
-			scanf("%f %f %f", &p, &r, &n);
-			r /= 100;
-			ci = p * pow(1 + r, n);
+			scanf("%f %f %f", &amount, &interestRate, &timePeriod);
+			interestRate /= 100;
+			simpleInterest = amount * interestRate * timePeriod;
+			maturityValue = amount * ( 1 + (interestRate * timePeriod) );
 
-			printf("Compound Interest: %lf\n", ci);
+			printf("Simple Interest: %f\nMaturity Value: %f\n", simpleInterest, maturityValue);
 
-		}else if(opt == 3){
+		}else if(option == 2){
+
+			float amount, interestRate, timePeriod, compoundInterest;
+
+			printf("Enter Principal Amount, Interest rate (%%), Period...\n");
+			scanf("%f %f %f", &amount, &interestRate, &timePeriod);
+			interestRate /= 100;
+			compoundInterest = amount * pow(1 + interestRate, timePeriod);
+
+			printf("Compound Interest: %lf\n", compoundInterest);
+
+		}else if(option == 3){
 			printf("%s\n", "Thank you !");
 		}else{
 			printf("%s\n", "Invalid choice !");
 		}
 
-	}while(opt != 3);
+	}while(option != 3);
 
 }
