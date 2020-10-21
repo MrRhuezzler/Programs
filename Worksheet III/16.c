@@ -19,10 +19,10 @@ int main()
         int side1 = (m * m) - (n * n);
         int side2 = 2 * m * n;
         int hypotenuse = (m * m)+(n * n);
-        printf("Side 1 = %d, Side 2 = %d, Hypotenuse = %d\n", side1, side2, hypotenuse);
+        printf("Side 1 = %d\nSide 2 = %d\nHypotenuse = %d\n", side1, side2, hypotenuse);
     }
     else
-        printf("Invalid Input(s).\n");
+        printf("Invalid Inputs...\n");
 
     return 0;
 }
