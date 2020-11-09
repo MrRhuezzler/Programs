@@ -7,37 +7,37 @@
 
 int main(){
 
-    float principalAmount, interestRate, i, payment;
+    float principalAmt, intRate, i, payment;
     float payInt, payPri;
     int monthlyPayments;
 
     printf("Enter the amount to be borrowed:");
-    scanf("%f", &principalAmount);
+    scanf("%f", &principalAmt);
     
     printf("Enter the Annual Interest rate:");
-    scanf("%f", &interestRate);
+    scanf("%f", &intRate);
     
     printf("Enter the number of monthly payments:");
     scanf("%d", &monthlyPayments);
     
-    i = interestRate / ( 100 * 12.0 );//monthly interest rate  
+    i = intRate / ( 100 * 12.0 );
     
-    payment = (i*principalAmount)/(1-pow(1+i,-monthlyPayments));//calculating monthly payment
+    payment = (i * principalAmt) / (1 - pow(1 + i, -monthlyPayments));
     
-    printf("\nPrincipal:%.2f\n",principalAmount);
-    printf("Annual Interest:%.2f\n",interestRate);
-    printf("Term: %d\n",monthlyPayments);
-    printf("Monthly Payment:%.2f\n\n",payment);
+    printf("\nPrincipal : %.2f\n" , principalAmt);
+    printf("Annual Interest : %.2f\n" , intRate);
+    printf("Term : %d\n" , monthlyPayments);
+    printf("Monthly Payment : %.2f\n\n" , payment);
     printf("Payment\tInterest\tPrincipal\tBalance\n");
     
-    for(int k=1;k<=monthlyPayments;k++){
+    for(int k = 1;k <= monthlyPayments;k++){
 
-        payInt = i*principalAmount;
+        payInt = i * principalAmt;
         payPri = payment - payInt;
-        principalAmount = principalAmount - payPri;
-        printf("%d\t%.2f\t\t%.2f\t\t%.2f\n", k, payInt, payPri, principalAmount);
+        principalAmt = principalAmt - payPri;
+        printf("%d\t%.2f\t\t%.2f\t\t%.2f\n", k, payInt, payPri, principalAmt);
 
     }
     
-    printf("Final Payment:%.2f", payInt+payPri);
+    printf("Final Payment:%.2f", payInt + payPri);
 }   
