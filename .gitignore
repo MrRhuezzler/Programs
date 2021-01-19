@@ -2,6 +2,9 @@
 *.docx
 *.doc
 *.exe
+*.out
 .idea/
 cmake-build-debug/
+build/
 CMakeLists.txt
+.vscode/
