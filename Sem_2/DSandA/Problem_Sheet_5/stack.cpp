@@ -29,7 +29,7 @@ void Stack::push(int elem){
 void Stack::pop(){
     
     if(!isempty()){
-        t--;
+        arr[t--] = 0;
     }else{
         std::cout << "[ERROR] Stack Underflow, when trying to pop" << std::endl;
     }
@@ -42,6 +42,7 @@ int Stack::top(){
         return arr[t];
     }else{
         std::cout << "[ERROR] Stack is empty !" << std::endl;
+        return -1;
     }
 
 }
@@ -56,4 +57,12 @@ bool Stack::isfull(){
 
 bool Stack::isempty(){
     return t == -1;
+}
+
+
+void Stack::print(){
+    for(int i = n - 1; i > -1; i--){
+        std::cout << arr[i] << ", ";
+    }
+    std::cout << std::endl;
 }

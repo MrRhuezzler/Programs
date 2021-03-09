@@ -22,6 +22,9 @@ class Stack {
         bool isfull();
         bool isempty();
 
+        // Outputs
+        void print();
+        
 };
 
 #endif
