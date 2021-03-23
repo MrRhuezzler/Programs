@@ -152,15 +152,17 @@ int maxOf(int *elem, int n)
   
 
 void arangIndices(int *elem, int n, int exp) 
-{ 
+{
     int *output = (int *) malloc(sizeof(int) * n);
     int i, count[10] = { 0 };
-  
-    for (i = 0; i < n; i++) 
-        count[(elem[i] / exp) % 10]++; 
 
-    for (i = 1; i < 10; i++) 
+    for (i = 0; i < n; i++){
+        count[(elem[i] / exp) % 10]++; 
+    }
+
+    for (i = 1; i < 10; i++){
         count[i] += count[i - 1]; 
+    }
 
     for (i = n - 1; i >= 0; i--) { 
         output[count[(elem[i] / exp) % 10] - 1] = elem[i]; 
@@ -171,15 +173,17 @@ void arangIndices(int *elem, int n, int exp)
         elem[i] = output[i];
 
     free(output);
-} 
-  
+}
+
 
 void radixsort(int arr[], int n) 
-{ 
+{
     int m = maxOf(arr, n);
-    for (int exp = 1; m / exp > 0; exp *= 10) 
+    for (int exp = 1; m / exp > 0; exp *= 10){
         arangIndices(arr, n, exp); 
-} 
+    }
+
+}
 
 
 
@@ -201,11 +205,11 @@ int binarySearch(int *elem, int n, int target){
     while(hi > lo){
 
         if(elem[mid] > target){
-            hi = mid;
+            hi = mid - 1;
         }else if(elem[mid] == target){
             return mid;
         }else{
-            lo = mid;
+            lo = mid + 1;
         }
 
     }
@@ -215,22 +219,24 @@ int binarySearch(int *elem, int n, int target){
 
 int main(){
 
-    int n;
-    printf("Enter the number of elements : ");
-    scanf("%d", &n);
+    // int n;
+    // printf("Enter the number of elements : ");
+    // scanf("%d", &n);
 
-    int *array = (int *)malloc(n * sizeof(int));
+    // int *array = (int *)malloc(n * sizeof(int));
 
-    printf("Enter the array elements...\n");
-    for(int i = 0; i < n; i++){
-        scanf("%d", &array[i]);
-    }
+    // printf("Enter the array elements...\n");
+    // for(int i = 0; i < n; i++){
+    //     scanf("%d", &array[i]);
+    // }
 
-    printArray(array, n);
+    int array[6] = {5, 10, 1, 30, 123, 50};
 
-    quickSort(array, 0, n - 1);
+    printArray(array, 6);
 
-    printArray(array, n);
+    radixsort(array, 6);
+
+    printArray(array, 6);
 
 
     return 0;

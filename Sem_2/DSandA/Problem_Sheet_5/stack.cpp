@@ -17,7 +17,7 @@ Stack::~Stack(){
 }
 
 void Stack::push(int elem){
-    
+
     if(!isfull()){
         arr[++t] = elem;
     }else{
@@ -27,7 +27,7 @@ void Stack::push(int elem){
 }
 
 void Stack::pop(){
-    
+
     if(!isempty()){
         arr[t--] = 0;
     }else{
@@ -37,7 +37,7 @@ void Stack::pop(){
 }
 
 int Stack::top(){
-    
+
     if(!isempty()){
         return arr[t];
     }else{
@@ -59,10 +59,10 @@ bool Stack::isempty(){
     return t == -1;
 }
 
-
 void Stack::print(){
     for(int i = n - 1; i > -1; i--){
         std::cout << arr[i] << ", ";
     }
     std::cout << std::endl;
 }
+

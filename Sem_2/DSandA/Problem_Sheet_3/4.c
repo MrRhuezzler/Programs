@@ -35,7 +35,7 @@ poly* initPoly(int hiOrder){
 }
 
 
-poly * add(poly *a, poly *b){
+poly* add(poly *a, poly *b){
 
     poly *ans = (poly *) malloc(sizeof(poly));
 

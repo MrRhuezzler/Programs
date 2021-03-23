@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 typedef struct {
-    
+
     int size;
     int **matrix;
     int m;
@@ -77,7 +77,7 @@ sparseMatrix* addSparseMatrices(sparseMatrix *a, sparseMatrix *b){
         b_sub = b->matrix[j];
 
         if(a_sub[0] == b_sub[0] && a_sub[1] == b_sub[1]){
-            
+
             ans->matrix[k][0] = a_sub[0];
             ans->matrix[k][1] = a_sub[1];
             ans->matrix[k][2] = a_sub[2] + b_sub[2];
@@ -118,18 +118,20 @@ sparseMatrix* addSparseMatrices(sparseMatrix *a, sparseMatrix *b){
                     k++;
 
                 }else {
+
                     ans->matrix[k][0] = b_sub[0];
                     ans->matrix[k][1] = b_sub[1];
                     ans->matrix[k][2] = b_sub[2];
 
                     j++;
                     k++;
+
                 }
 
             }
         }
     }
-    
+
     for(; i < a->size; i++){
         a_sub = a->matrix[i];
         ans->matrix[k][0] = a_sub[0];
@@ -137,7 +139,7 @@ sparseMatrix* addSparseMatrices(sparseMatrix *a, sparseMatrix *b){
         ans->matrix[k][2] = a_sub[2];
         k++;
     }
-    
+
 
     for(; j < b->size; j++){
         b_sub = b->matrix[j];
@@ -196,7 +198,7 @@ int main(){
     // int sparse2[4][5] = {{0,0,2,3,0},{0,0,6,2,7},{0,0,5,0,0},{0,2,6,0,0}};
 
     int rows1, rows2, cols1, cols2;
-    
+
     printf("First Matrix\n");
     printf("Enter number of rows : ");
     scanf("%d", &rows1);
