@@ -41,6 +41,7 @@ char Stack::top(){
     if(!isempty()){
         return arr[t];
     }
+    std::cout << "Stack is Empty !" << std::endl; 
     exit(0);
 
 }
