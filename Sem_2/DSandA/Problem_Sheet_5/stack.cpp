@@ -5,7 +5,7 @@ Stack::Stack(int n)
 :n(n), t(-1)
 {
 
-    arr = new int[n];
+    arr = new char[n];
     for(int i = 0; i < n; i++){
         arr[i] = 0;
     }
@@ -16,7 +16,7 @@ Stack::~Stack(){
     delete[] arr;
 }
 
-void Stack::push(int elem){
+void Stack::push(char elem){
 
     if(!isfull()){
         arr[++t] = elem;
@@ -29,21 +29,19 @@ void Stack::push(int elem){
 void Stack::pop(){
 
     if(!isempty()){
-        arr[t--] = 0;
+        t--;
     }else{
         std::cout << "[ERROR] Stack Underflow, when trying to pop" << std::endl;
     }
 
 }
 
-int Stack::top(){
+char Stack::top(){
 
     if(!isempty()){
         return arr[t];
-    }else{
-        std::cout << "[ERROR] Stack is empty !" << std::endl;
-        return -1;
     }
+    exit(0);
 
 }
 
@@ -60,9 +58,26 @@ bool Stack::isempty(){
 }
 
 void Stack::print(){
-    for(int i = n - 1; i > -1; i--){
+    for(int i = 0; i < size(); i++){
         std::cout << arr[i] << ", ";
     }
     std::cout << std::endl;
 }
 
+void Stack::reverse(){
+
+    int *temp = new int[n];
+    int n = size();
+
+    for(int i = 0; i < n; i++){
+        temp[i] = top();
+        pop();
+    }
+
+    for(int i = 0; i < n; i++){
+        push(temp[i]);
+    }
+
+    delete[] temp;
+
+}

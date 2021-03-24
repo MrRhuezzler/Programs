@@ -4,7 +4,7 @@
 class Stack {
 
     private:
-        int *arr;
+        char *arr;
         int t;
         int n;
 
@@ -13,10 +13,11 @@ class Stack {
         ~Stack();
         
         // Methods
-        void push(int elem);
+        void push(char elem);
         void pop();
-        int top();
+        char top();
         int size();
+        void reverse();
 
         // Emptiness n Fullness
         bool isfull();
@@ -24,7 +25,7 @@ class Stack {
 
         // Outputs
         void print();
-        
+
 };
 
 #endif
