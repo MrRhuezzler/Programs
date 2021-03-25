@@ -4,7 +4,7 @@
 
 bool ones_n_zeros(std::string input){
 
-    Stack s(100);
+    Stack<char> s(100);
 
     for(char c : input){
         if(!s.isempty()){

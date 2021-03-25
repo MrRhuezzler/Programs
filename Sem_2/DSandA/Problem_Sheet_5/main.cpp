@@ -3,7 +3,7 @@
 
 int main(){
 
-    Stack s(10);
+    Stack<int> s(10);
 
     for(int i = 0; i < 8; i++){
         s.push(i);

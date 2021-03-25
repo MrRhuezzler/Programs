@@ -16,7 +16,7 @@ int preced(char c){
 
 std::string inToPo(std::string infix){
 
-    Stack s(100);
+    Stack<char> s(100);
     std::string postfix;
 
     for(char c : infix){
