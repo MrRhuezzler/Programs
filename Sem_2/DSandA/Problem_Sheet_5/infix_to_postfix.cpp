@@ -42,7 +42,6 @@ std::string inToPo(std::string infix){
                 postfix += s.top();
                 s.pop();
             }
-            
             s.push(c);
         }
 
@@ -53,7 +52,7 @@ std::string inToPo(std::string infix){
         postfix += s.top();
         s.pop();
     }
-    
+
     return postfix;
 
 }
