@@ -8,3 +8,4 @@ build/
 CMakeLists.txt
 .vscode/
 .venv/
+*.class
