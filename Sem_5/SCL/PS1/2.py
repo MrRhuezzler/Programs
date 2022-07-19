@@ -35,3 +35,4 @@ def checkRREF(matrix):
                 return False
         return True
     return False
+
