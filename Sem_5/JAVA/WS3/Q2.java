@@ -1,6 +1,6 @@
 class Employee {
-    private int age;
-    private double salary;
+    int age;
+    double salary;
 
     Employee(int age, double salary) {
         this.age = age;
@@ -26,7 +26,7 @@ class Employee {
 }
 
 class Clerk extends Employee {
-    private int illDays;
+    int illDays;
 
     Clerk(int age, double salary) {
         super(age, salary);
@@ -47,7 +47,7 @@ class Clerk extends Employee {
 }
 
 class Director extends Employee {
-    private double gratification;
+    double gratification;
 
     Director(int age, double salary, double gratification) {
         super(age, salary);
