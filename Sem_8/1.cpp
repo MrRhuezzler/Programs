@@ -11,10 +11,10 @@
 #include <thread>
 #include <chrono>
 
-#define NUM_THREADS 2
-#define EXHAUSTED_RUNS 5
-#define MAX_SOLO_RUNS 3
-#define MAX_MISSED_RUNS 2
+#define NUM_THREADS 10
+#define EXHAUSTED_RUNS 20
+#define MAX_SOLO_RUNS 10
+#define MAX_MISSED_RUNS 5
 
 class Runner
 {
@@ -42,56 +42,68 @@ public:
 		bool isLeader;
 		bool missedRun = false;
 
-		while (isRunnable)
+		while (true)
 		{
 			isLeader = false;
 
 			// Study Time
-			if (!missedRun)
+			if (isRunnable && !missedRun)
 			{
 				std::this_thread::sleep_for(std::chrono::seconds(this->studyTime));
 			}
 
+			if (isRunnable)
+			{
 #pragma omp single nowait
-			{
-				isLeader = true;
-				missedRun = false;
-				Runner::currentRunners++;
-				std::this_thread::sleep_for(std::chrono::seconds(Runner::runningSessionWaitTime));
-				Runner::sessionStart = true;
-			}
-
-#pragma omp critical
-			{
-				if (!isLeader)
 				{
-					if (!Runner::sessionStart)
-					{
-						missedRun = false;
-						Runner::currentRunners++;
-					}
-					else
-					{
-						this->missed_sessions++;
-						if (this->missed_sessions > MAX_MISSED_RUNS)
-							isRunnable = false;
-						missedRun = true;
-					}
+					isLeader = true;
+					missedRun = false;
+					Runner::currentRunners++;
+					std::this_thread::sleep_for(std::chrono::seconds(Runner::runningSessionWaitTime));
+					Runner::sessionStart = true;
 				}
 			}
 
+			if (isRunnable)
+			{
+#pragma omp critical
+				{
+					if (!isLeader)
+					{
+						if (!Runner::sessionStart)
+						{
+							missedRun = false;
+							Runner::currentRunners++;
+						}
+						else
+						{
+							this->missed_sessions++;
+							if (this->missed_sessions > MAX_MISSED_RUNS)
+							{
+								std::cout << "r" << id << " stopped after " << runs_completed << " run(s)."
+										  << " He missed " << missed_sessions << " run(s) and did run " << solo_runs << " times alone." << std::endl;
+								isRunnable = false;
+							}
+							missedRun = true;
+						}
+					}
+				}
+			}
 #pragma omp barrier
 
-#pragma omp critical
+			if (!isRunnable)
 			{
-				if (isLeader)
+#pragma omp critical
 				{
-					if (Runner::currentRunners == 1)
-						this->solo_runs++;
+					if (isLeader)
+					{
+						if (Runner::currentRunners == 1)
+							this->solo_runs++;
+					}
 				}
 			}
 
-			if (!missedRun)
+			if (isRunnable && !missedRun)
 			{
 
 				// Run Time
@@ -100,15 +112,21 @@ public:
 
 				if (this->runs_completed >= EXHAUSTED_RUNS || this->solo_runs >= MAX_SOLO_RUNS)
 				{
+					std::cout << "r" << id << " stopped after " << runs_completed << " run(s)."
+							  << " He missed " << missed_sessions << " run(s) and did run " << solo_runs << " times alone." << std::endl;
 					isRunnable = false;
 				}
 			}
 
-#pragma omp single
+			if (!isRunnable)
 			{
-				Runner::currentRunners = 0;
-				Runner::sessionStart = false;
+#pragma omp single
+				{
+					Runner::currentRunners = 0;
+					Runner::sessionStart = false;
+				}
 			}
+#pragma omp barrier
 		}
 	}
 };
@@ -125,8 +143,8 @@ int main()
 	std::uniform_int_distribution<std::mt19937::result_type> rdist(1, 5);
 	std::uniform_int_distribution<std::mt19937::result_type> sdist(1, 5);
 
-	int runningTimes[NUM_THREADS] = { 0 };
-	int studyTimes[NUM_THREADS] = { 0 };
+	int runningTimes[NUM_THREADS] = {0};
+	int studyTimes[NUM_THREADS] = {0};
 	for (int i = 0; i < NUM_THREADS; i++)
 	{
 		runningTimes[i] = rdist(rng);
@@ -147,12 +165,12 @@ int main()
 		runners[id].run();
 	}
 
-	for (int i = 0; i < NUM_THREADS; i++)
-	{
-		Runner r = runners[i];
-		std::cout << "r" << r.id << " stopped after " << r.runs_completed << " run(s)."
-			<< " He missed " << r.missed_sessions << " run(s) and did run " << r.solo_runs << " times alone." << std::endl;
-	}
+	// for (int i = 0; i < NUM_THREADS; i++)
+	// {
+	// 	Runner r = runners[i];
+	// 	std::cout << "r" << id << " stopped after " << runs_completed << " run(s)."
+	// 		<< " He missed " << missed_sessions << " run(s) and did run " << solo_runs << " times alone." << std::endl;
+	// }
 
 	return 0;
 }
